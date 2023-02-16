@@ -8,7 +8,6 @@ class LinearProbe(nn.Module):
     def __init__(self, model, mlp, freeze, in_ch, out_ch, act=None):
         """
         Args:
-            model: nn.Module
             mlp: bool, if True, then use the MLP layer as the linear probe module
             freeze: bool, if Ture, then freeze all the CLAP model's layers when training the linear probe
             in_ch: int, the output channel from CLAP model
@@ -33,12 +32,10 @@ class LinearProbe(nn.Module):
             self.act = None
         elif act == "relu":
             self.act = nn.ReLU()
-        elif act == "elu":
             self.act = nn.ELU()
         elif act == "prelu":
             self.act = nn.PReLU(num_parameters=in_ch)
         elif act == "softmax":
-            self.act = nn.Softmax(dim=-1)
         elif act == "sigmoid":
             self.act = nn.Sigmoid()
 
